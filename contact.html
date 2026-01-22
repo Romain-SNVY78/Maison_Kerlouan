@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact – Ty Pierrot</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+  <div class="wrap nav" role="navigation" aria-label="Navigation principale">
+    <div class="brand" aria-label="Accueil">
+      <a href="index.html" style="text-decoration:none;color:inherit;font-weight:800;">Ty Pierrot</a>
+    </div>
+
+    <button class="burger" aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="menu" class="menu">
+      <a href="index.html">Accueil</a>
+      <a href="maison.html">La maison</a>
+      <a href="galerie.html">Galerie</a>
+      <a href="localisation.html">Localisation</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="reservation.html">Réservation</a>
+      <a href="contact.html" class="cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+  <main>
+    <section id="contact">
+      <div class="wrap">
+        <h2>Contact</h2>
+        <form id="contactForm">
+          <label for="nom">Nom</label>
+          <input id="nom" required>
+          <label for="email">Email</label>
+          <input id="email" type="email" required>
+          <label for="msg">Message</label>
+          <textarea id="msg" rows="5" required></textarea>
+          <button type="submit">Envoyer</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap foot"><div><strong>Ty Pierrot</strong></div></div></footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ty Pierrot – Gîte à Kerlouan</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ✅ Correction du petit trait parasite */
+    header .burger {
+      display: none; /* Caché sur desktop */
+    }
+    @media (max-width: 920px) {
+      header .burger {
+        display: flex; /* S’affiche seulement sur mobile */
+      }
+    }
+
+    /* Sécurité : supprime tout artefact visuel accidentel */
+    header button:empty {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+      overflow: hidden;
+      border: 0 !important;
+      background: none !important;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav" role="navigation" aria-label="Navigation principale">
+      <div class="brand" aria-label="Accueil">
+        <a href="index.html" style="text-decoration:none;color:inherit;font-weight:800;">Ty Pierrot</a>
+      </div>
+
+      <!-- Bouton burger (mobile uniquement) -->
+      <button class="burger" aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="menu" class="menu">
+        <a href="index.html" class="active">Accueil</a>
+        <a href="maison.html">La maison</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="localisation.html">Localisation</a>
+        <a href="tarifs.html">Tarifs</a>
+        <a href="reservation.html">Réservation</a>
+        <a href="contact.html" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="inner">
+        <h1>Votre maison de vacances à Kerlouan</h1>
+        <p>À 700 m des plages et du site classé de Ménéham, notre gîte <strong>6 personnes</strong> vous accueille pour des vacances iodées au cœur de la côte des Légendes.</p>
+        <div class="actions">
+          <a class="btn accent" href="tarifs.html">Réserver</a>
+          <a class="btn primary" href="galerie.html">Voir les photos</a>
+          <a class="btn primary" href="localisation.html">Nous situer</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="hero-photo">
+      <img src="image/facade-maison-1.jpg" alt="Façade de la maison Ty Pierrot">
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div><strong>Ty Pierrot</strong><br>Maison de vacances à Kerlouan · Bretagne</div>
+      <div><strong>Navigation</strong><br><a href="maison.html">La maison</a><br><a href="tarifs.html">Tarifs</a><br><a href="contact.html">Contact</a></div>
+      <div class="copyright">© <span id="year"></span> Ty Pierrot – Tous droits réservés.</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

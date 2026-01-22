@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Galerie — Ty Pierrot</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">Ty Pierrot</div>
+      <nav class="menu">
+        <a href="index.html">Accueil</a>
+        <a href="maison.html">La maison</a>
+        <a href="galerie.html" class="active">Galerie</a>
+        <a href="localisation.html">Localisation</a>
+        <a href="tarifs.html">Tarifs</a>
+        <a href="reservation.html">Réservation</a>
+        <a href="contact.html" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hd">
+      <h1>Galerie</h1>
+      <p class="lead">Un aperçu de la maison et des alentours</p>
+    </div>
+
+    <div class="gallery">
+
+      <!-- Salon -->
+      <figure class="card-gallery"
+              data-gallery="salon"
+              data-images="image/salon.jpg|image/salon2.jpg|image/salon3.jpg">
+        <img src="image/salon.jpg" alt="Salon lumineux">
+        <figcaption>Salon lumineux</figcaption>
+      </figure>
+
+      <!-- Cuisine -->
+      <figure class="card-gallery"
+              data-gallery="cuisine"
+              data-images="image/cuisine.jpg|image/cuisine-2.jpg">
+        <img src="image/cuisine.jpg" alt="Cuisine équipée">
+        <figcaption>Cuisine équipée</figcaption>
+      </figure>
+
+      <!-- Chambre lits simples -->
+      <figure class="card-gallery"
+              data-gallery="chambre-lits-simples"
+              data-images="image/chambre-lits-simples.jpg|image/chambre-lits-simples2.jpg">
+        <img src="image/chambre-lits-simples.jpg" alt="Chambre lits simples">
+        <figcaption>Chambre lits simples</figcaption>
+      </figure>
+
+      <!-- Chambre lit double – Côté mer -->
+      <figure class="card-gallery"
+              data-gallery="lit-double-cote-mer"
+              data-images="image/lit-double–Côté-mer.jpg|image/lit-double–Côté-mer2.jpg">
+        <img src="image/lit-double–Côté-mer.jpg" alt="Chambre lit double - Côté mer">
+        <figcaption>Chambre lit double - Côté mer</figcaption>
+      </figure>
+
+      <!-- Chambre lit double – Côté terre -->
+      <figure class="card-gallery"
+              data-gallery="lit-double-cote-terre"
+              data-images="image/lit-double–Côté-terre.jpg|image/lit-double–Côté-terre2.jpg">
+        <img src="image/lit-double–Côté-terre.jpg" alt="Chambre lit double - Côté terre">
+        <figcaption>Chambre lit double - Côté terre</figcaption>
+      </figure>
+
+      <!-- Salle à manger -->
+      <figure class="card-gallery"
+              data-gallery="salle-a-manger"
+              data-images="image/salle-a-manger.jpg">
+        <img src="image/salle-a-manger.jpg" alt="Salle à manger">
+        <figcaption>Salle à manger</figcaption>
+      </figure>
+
+      <!-- Salle d’eau -->
+      <figure class="card-gallery"
+              data-gallery="salle-deau"
+              data-images="image/salle-deau.jpg">
+        <img src="image/salle-deau.jpg" alt="Salle d’eau">
+        <figcaption>Salle d’eau</figcaption>
+      </figure>
+
+      <!-- Jardin -->
+      <figure class="card-gallery"
+              data-gallery="jardin"
+              data-images="image/jardin.jpg|image/jardin2.jpg|image/jardin3.jpg|image/jardin4.jpg|image/jardin5.jpg|image/jardin6.jpg">
+        <img src="image/jardin.jpg" alt="Jardin du gîte">
+        <figcaption>Jardin du gîte</figcaption>
+      </figure>
+
+      <!-- Devant la maison -->
+      <figure class="card-gallery"
+              data-gallery="devant-maison"
+              data-images="image/devant-maison.jpg|image/devant-maison2.jpg">
+        <img src="image/devant-maison.jpg" alt="Vue devant la maison">
+        <figcaption>Vue devant la maison</figcaption>
+      </figure>
+
+      <!-- Plages de Ménéham -->
+      <figure class="card-gallery"
+              data-gallery="plage-meneham"
+              data-images="image/plage-ménéham.jpg|image/plage-ménéham2.jpg|image/plage-ménéham3.jpg|image/plage-ménéham4.jpg|image/plage-ménéham5.jpg|image/plage-ménéham6.jpg|image/plage-ménéham7.jpg">
+        <img src="image/plage-ménéham.jpg" alt="Plages de Ménéham">
+        <figcaption>Plages de Ménéham</figcaption>
+      </figure>
+
+      <!-- Village de Ménéham -->
+      <figure class="card-gallery"
+              data-gallery="village-meneham"
+              data-images="image/village-ménéham.jpg|image/village-ménéham2.jpg|image/site-ménéham.jpg">
+        <img src="image/village-ménéham.jpg" alt="Village de Ménéham">
+        <figcaption>Village de Ménéham</figcaption>
+      </figure>
+
+      <!-- Maison du douanier -->
+      <figure class="card-gallery"
+              data-gallery="maison-douanier"
+              data-images="image/maison-douanier.jpg">
+        <img src="image/maison-douanier.jpg" alt="Maison du douanier à Ménéham">
+        <figcaption>Maison du douanier à Ménéham</figcaption>
+      </figure>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div>
+        <strong>Ty Pierrot</strong><br>
+        Maison de vacances à Kerlouan · Bretagne
+      </div>
+      <div class="copyright">© <span id="year"></span> Ty Pierrot – Tous droits réservés.</div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Réservation – Ty Pierrot</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 🌿 Librairie calendrier Flatpickr -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+
+  <style>
+    /* === Style spécifique à la page Réservation === */
+
+    .reservation {
+      max-width: 700px;
+      margin: 60px auto;
+      background: var(--sand);
+      padding: 40px 50px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .reservation h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .reservation p {
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: grid;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #fff;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 2px rgba(0,152,219,0.25);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--brand), var(--brand-600));
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #00b2f0, #0098db);
+      box-shadow: 0 6px 14px rgba(0,123,193,.35);
+      transform: translateY(-2px);
+    }
+
+    /* === Personnalisation Flatpickr === */
+    .flatpickr-calendar {
+      border-radius: 16px !important;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08) !important;
+      border: 1px solid #e2e8f0 !important;
+      font-family: system-ui, sans-serif;
+    }
+
+    .flatpickr-months {
+      background: var(--brand);
+      color: #fff;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .flatpickr-day.today {
+      border-color: var(--brand);
+      color: var(--brand);
+    }
+
+    .flatpickr-day.selected {
+      background: var(--brand) !important;
+      color: #fff !important;
+      border: none;
+    }
+
+    .flatpickr-day:hover {
+      background: rgba(0,152,219,0.15);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <a href="index.html" style="text-decoration:none;color:inherit;font-weight:800;">Ty Pierrot</a>
+      </div>
+      <nav id="menu" class="menu">
+        <a href="index.html">Accueil</a>
+        <a href="maison.html">La maison</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="localisation.html">Localisation</a>
+        <a href="tarifs.html">Tarifs</a>
+        <a href="reservation.html" class="active">Réservation</a>
+        <a href="contact.html" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="reservation">
+      <h1>Réservez votre séjour</h1>
+      <p>Choisissez vos dates et envoyez-nous votre demande de réservation.</p>
+
+      <form id="book">
+        <div>
+          <label for="dates">Dates de séjour :</label>
+          <input id="dates" name="dates" type="text" placeholder="Sélectionnez vos dates" required>
+        </div>
+
+        <div>
+          <label for="nom">Nom complet :</label>
+          <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+        </div>
+
+        <div>
+          <label for="email">Adresse e-mail :</label>
+          <input type="email" id="email" name="email" placeholder="vous@email.fr" required>
+        </div>
+
+        <div class="two">
+          <div>
+            <label for="adultes">Adultes :</label>
+            <input type="number" id="adultes" name="adultes" min="1" value="2">
+          </div>
+          <div>
+            <label for="enfants">Enfants :</label>
+            <input type="number" id="enfants" name="enfants" min="0" value="0">
+          </div>
+        </div>
+
+        <div>
+          <label for="message">Message complémentaire :</label>
+          <textarea id="message" name="message" placeholder="Précisez vos besoins ou horaires d’arrivée..."></textarea>
+        </div>
+
+        <button type="submit">Envoyer la demande</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div><strong>Ty Pierrot</strong><br>Maison de vacances à Kerlouan · Bretagne</div>
+      <div class="copyright">© <span id="year"></span> Ty Pierrot – Tous droits réservés.</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+
+  <script>
+    // === Activation du calendrier Flatpickr ===
+    flatpickr("#dates", {
+      locale: "fr",
+      mode: "range", // permet de choisir arrivée + départ
+      dateFormat: "d/m/Y",
+      minDate: "today",
+      altInput: true,
+      altFormat: "j F Y",
+      showMonths: 1,
+      weekNumbers: true
+    });
+  </script>
+</body>
+</html>
