@@ -193,16 +193,16 @@ h2{font-size:clamp(22px,3vw,32px);margin:0}
   background:rgba(255,255,255,.18);
   border:0;
   color:#fff;
-  font-size:32px;
+  font-size:48px;
   line-height:1;
-  padding:.35rem .6rem;
+  padding:.5rem .8rem;
   border-radius:10px;
   cursor:pointer;
   user-select:none;
 }
 .lightbox button:hover{background:rgba(255,255,255,.28);}
-.lightbox .lb-prev{left:24px;top:50%;transform:translateY(-50%);}
-.lightbox .lb-next{right:24px;top:50%;transform:translateY(-50%);}
+.lightbox .lb-prev{left:150px;top:50%;transform:translateY(-50%);}
+.lightbox .lb-next{right:150px;top:50%;transform:translateY(-50%);}
 .lightbox .lb-close{right:16px;top:16px;font-size:28px;}
 .card-gallery{cursor:zoom-in;}
 
