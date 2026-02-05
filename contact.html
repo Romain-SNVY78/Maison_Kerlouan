@@ -5,6 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact – Ty Pierrot</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #0f172a; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #f9fafb;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      background: #fff;
+      border-color: #0098db;
+      box-shadow: 0 0 0 3px rgba(0, 152, 219, 0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
+    .btn-submit {
+      background: linear-gradient(135deg, #0098db, #007ec1);
+      color: #fff;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 123, 193, 0.25);
+    }
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #00b2f0, #0098db);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 123, 193, 0.35);
+    }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-info h3 { margin-top: 0; color: #0098db; }
+    .contact-info p { margin: 12px 0; line-height: 1.6; }
+    .contact-info strong { display: inline-block; min-width: 120px; }
+    .response-time { background: #eaf6ff; border-left: 4px solid #0098db; padding: 15px; border-radius: 4px; margin-top: 20px; }
+  </style>
 </head>
 <body>
   <header>
@@ -23,7 +73,7 @@
       <a href="galerie.html">Galerie</a>
       <a href="localisation.html">Localisation</a>
       <a href="tarifs.html">Tarifs</a>
-      <a href="reservation.html">Réservation</a>
+      <a href="reservation.html">Reservation</a>
       <a href="contact.html" class="cta">Contact</a>
     </nav>
   </div>
@@ -32,21 +82,118 @@
   <main>
     <section id="contact">
       <div class="wrap">
-        <h2>Contact</h2>
-        <form id="contactForm">
-          <label for="nom">Nom</label>
-          <input id="nom" required>
-          <label for="email">Email</label>
-          <input id="email" type="email" required>
-          <label for="msg">Message</label>
-          <textarea id="msg" rows="5" required></textarea>
-          <button type="submit">Envoyer</button>
-        </form>
+        <h2>Nous contacter</h2>
+        <p class="lead">Une question sur Ty Pierrot ? Nous sommes la pour vous aider !</p>
+
+        <div class="contact-grid">
+          <div>
+            <h3 style="margin-top:0;">Formulaire de contact</h3>
+            <form id="contactForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="nom">Nom *</label>
+                  <input id="nom" name="nom" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input id="email" name="email" type="email" required>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="tel">Telephone</label>
+                  <input id="tel" name="tel" type="tel">
+                </div>
+                <div class="form-group">
+                  <label for="sujet">Sujet *</label>
+                  <select id="sujet" name="sujet" required>
+                    <option value="">-- Selectionnez un sujet --</option>
+                    <option value="reservation">Question de reservation</option>
+                    <option value="disponibilite">Verifier disponibilite</option>
+                    <option value="equipement">Question sur les equipements</option>
+                    <option value="localisation">Question sur la localisation</option>
+                    <option value="autre">Autre demande</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="msg">Message *</label>
+                <textarea id="msg" name="msg" required placeholder="Decrivez votre demande en detail..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit">Envoyer mon message</button>
+              <div class="response-time">
+                <strong>⏱️ Reponse rapide</strong><br>
+                Nous repondons a vos messages sous 24h en semaine.
+              </div>
+            </form>
+          </div>
+
+          <div class="contact-info">
+            <h3 style="margin-top:0;">Informations pratiques</h3>
+            
+            <div class="card" style="margin-bottom:20px;">
+              <h4>📍 Localisation</h4>
+              <p>
+                <strong>Adresse :</strong> Ty Pierrot, Meneham, Kerlouan<br>
+                <strong>Departement :</strong> Finistere (29)<br>
+                <strong>Region :</strong> Bretagne
+              </p>
+            </div>
+
+            <div class="card" style="margin-bottom:20px;">
+              <h4>🗓️ Disponibilite</h4>
+              <p>
+                <strong>Ouvert :</strong> Toute l'annee<br>
+                <strong>Reservation :</strong> Semaines ou nuitees sur demande<br>
+                <strong>Arrivee :</strong> A partir de 15h<br>
+                <strong>Depart :</strong> Avant 11h
+              </p>
+            </div>
+
+            <div class="card" style="margin-bottom:20px;">
+              <h4>💬 Modes de contact</h4>
+              <p>
+                📧 Via ce formulaire (reponse sous 24h)<br>
+                📞 Appelez directement pour les urgences<br>
+                💻 Consultez la page <a href="reservation.html">Reservation</a>
+              </p>
+            </div>
+
+            <div class="card" style="background:#f0f9ff; border:1px solid #0098db;">
+              <h4>✅ Agrement Clevacances</h4>
+              <p>
+                <strong>Numero :</strong> 029MS000528<br>
+                Membre depuis juillet 2019
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:50px; background:#fef3c7; border-left:4px solid #fbbf24;">
+          <h3 style="margin-top:0;">Questions frequentes</h3>
+          <ul style="margin:0; padding-left:20px;">
+            <li><strong>Comment reserver ?</strong> Consultez la page <a href="tarifs.html">Tarifs</a> et <a href="reservation.html">Reservation</a> pour les details.</li>
+            <li><strong>Quels sont les tarifs ?</strong> De 590EUR (basse saison) a 950EUR (juillet-aout). <a href="tarifs.html">Voir tous les tarifs</a></li>
+            <li><strong>Animaux acceptes ?</strong> Non, les animaux ne sont pas acceptes. Voir <a href="pratique.html">Infos pratiques</a></li>
+            <li><strong>Ou est la maison ?</strong> A 700 m des plages de Kerlouan. <a href="localisation.html">Voir la localisation</a></li>
+          </ul>
+        </div>
+
       </div>
     </section>
   </main>
 
-  <footer><div class="wrap foot"><div><strong>Ty Pierrot</strong></div></div></footer>
+  <footer>
+    <div class="wrap foot">
+      <div><strong>Ty Pierrot</strong><br>Maison de vacances a Kerlouan - Bretagne</div>
+      <div><strong>Navigation</strong><br><a href="maison.html">La maison</a><br><a href="tarifs.html">Tarifs</a><br><a href="localisation.html">Localisation</a><br><a href="avis.html">Avis</a></div>
+      <div><strong>Informations</strong><br><a href="pratique.html">Infos pratiques</a><br><a href="contact.html">Contact</a><br><a href="reservation.html">Reservation</a></div>
+    </div>
+  </footer>
   <script src="js/main.js"></script>
 </body>
 </html>
