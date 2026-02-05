@@ -236,7 +236,7 @@ footer a{color:#bae6fd}
   color:#94a3b8;
 }
 
-/* ===== Cartes Tarifs ===== */
+/* ===== Tarifs (ancien) ===== */
 #tarifs .price .slot{
   background:#fff;
   border:1px solid #e2e8f0;
@@ -248,4 +248,87 @@ footer a{color:#bae6fd}
 #tarifs .price .slot:hover{
   transform:translateY(-4px);
   box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+
+/* ===== Calculateur de tarifs ===== */
+.price-calculator {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 32px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.05);
+}
+
+.calendar-section {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.calendar-section label {
+  display: block;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.calendar-section input[type="date"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #0f172a;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color .2s ease;
+}
+
+.calendar-section input[type="date"]:focus {
+  outline: none;
+  border-color: #0098db;
+  box-shadow: 0 0 0 3px rgba(0, 152, 219, 0.1);
+}
+
+#priceDisplay {
+  margin-top: 24px;
+  animation: slideDown .3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.season-info {
+  background: #fff;
+  border-left: 5px solid #0098db;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.season-name {
+  font-size: 1rem;
+  color: #475569;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.season-price {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #0098db;
+  margin: 0;
+}
+
+.season-price::after {
+  content: " €";
+  font-size: 1.2rem;
 }

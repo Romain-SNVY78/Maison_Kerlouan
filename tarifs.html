@@ -33,10 +33,18 @@
     <section id="tarifs">
       <div class="wrap">
         <h2>Tarifs à la semaine</h2>
-        <div class="price">
-          <div class="slot"><h3>Basse saison</h3><div class="value">590 €</div></div>
-          <div class="slot"><h3>Moyenne saison</h3><div class="value">730 €</div></div>
-          <div class="slot"><h3>Haute saison</h3><div class="value">950 €</div><p class="lead">Juillet - Août</p></div>
+        
+        <div class="price-calculator">
+          <div class="calendar-section">
+            <label for="checkIn">Sélectionnez une date d'arrivée :</label>
+            <input type="date" id="checkIn">
+            <div id="priceDisplay" class="price-display">
+              <div class="season-info">
+                <p class="season-name"></p>
+                <p class="season-price"></p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="card">

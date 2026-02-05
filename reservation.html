@@ -7,11 +7,6 @@
 
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- 🌿 Librairie calendrier Flatpickr -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
-
   <style>
     /* === Style spécifique à la page Réservation === */
 
@@ -85,33 +80,51 @@
       transform: translateY(-2px);
     }
 
-    /* === Personnalisation Flatpickr === */
-    .flatpickr-calendar {
-      border-radius: 16px !important;
-      box-shadow: 0 10px 25px rgba(0,0,0,.08) !important;
-      border: 1px solid #e2e8f0 !important;
-      font-family: system-ui, sans-serif;
+    /* === Personnalisation réservation améliorée === */
+    .booking-grid {
+      display: grid;
+      gap: 24px;
+      margin-bottom: 20px;
     }
 
-    .flatpickr-months {
-      background: var(--brand);
-      color: #fff;
-      border-radius: 16px 16px 0 0;
+    .date-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
 
-    .flatpickr-day.today {
-      border-color: var(--brand);
-      color: var(--brand);
+    @media (max-width: 600px) {
+      .date-fields {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .flatpickr-day.selected {
-      background: var(--brand) !important;
-      color: #fff !important;
-      border: none;
+    .stay-summary {
+      background: linear-gradient(135deg, #eaf6ff 0%, #f0f9ff 100%);
+      border: 2px solid #0098db;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .flatpickr-day:hover {
-      background: rgba(0,152,219,0.15);
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .summary-item strong {
+      font-weight: 700;
+      color: #007b8e;
+    }
+
+    .summary-item.price-item strong {
+      font-size: 1.4rem;
+      color: #0098db;
     }
   </style>
 </head>
@@ -140,9 +153,29 @@
       <p>Choisissez vos dates et envoyez-nous votre demande de réservation.</p>
 
       <form id="book">
-        <div>
-          <label for="dates">Dates de séjour :</label>
-          <input id="dates" name="dates" type="text" placeholder="Sélectionnez vos dates" required>
+        <div class="booking-grid">
+          <div class="date-fields">
+            <div>
+              <label for="arrivee">📅 Date d'arrivée :</label>
+              <input type="date" id="arrivee" name="arrivee" required>
+            </div>
+
+            <div>
+              <label for="depart">📅 Date de départ :</label>
+              <input type="date" id="depart" name="depart" required>
+            </div>
+          </div>
+
+          <div id="stayInfo" class="stay-summary" style="display:none;">
+            <div class="summary-item">
+              <span>Nombre de nuits :</span>
+              <strong id="nightCount">-</strong>
+            </div>
+            <div class="summary-item price-item">
+              <span>Prix estimé :</span>
+              <strong id="estimatedPrice">-</strong>
+            </div>
+          </div>
         </div>
 
         <div>
@@ -186,17 +219,72 @@
   <script src="js/main.js"></script>
 
   <script>
-    // === Activation du calendrier Flatpickr ===
-    flatpickr("#dates", {
-      locale: "fr",
-      mode: "range", // permet de choisir arrivée + départ
-      dateFormat: "d/m/Y",
-      minDate: "today",
-      altInput: true,
-      altFormat: "j F Y",
-      showMonths: 1,
-      weekNumbers: true
-    });
+    // === Gestion du formulaire de réservation amélioré ===
+    const arrivalInput = document.getElementById('arrivee');
+    const departInput = document.getElementById('depart');
+    const nightCountEl = document.getElementById('nightCount');
+    const estimatedPriceEl = document.getElementById('estimatedPrice');
+    const stayInfoEl = document.getElementById('stayInfo');
+    const bookForm = document.getElementById('book');
+
+    // Tarifs par saison
+    const seasons = {
+      'basse': { name: 'Basse saison', price: 590, months: [0, 1, 2, 10, 11] },
+      'moyenne': { name: 'Moyenne saison', price: 730, months: [3, 4, 5, 8, 9] },
+      'haute': { name: 'Haute saison', price: 950, months: [6, 7] }
+    };
+
+    function getSeason(date) {
+      const month = date.getMonth();
+      for (let season in seasons) {
+        if (seasons[season].months.includes(month)) {
+          return seasons[season];
+        }
+      }
+      return seasons.basse;
+    }
+
+    function calculateStay() {
+      if (!arrivalInput.value || !departInput.value) {
+        stayInfoEl.style.display = 'none';
+        return;
+      }
+
+      const arrival = new Date(arrivalInput.value);
+      const departure = new Date(departInput.value);
+
+      if (departure <= arrival) {
+        stayInfoEl.style.display = 'none';
+        return;
+      }
+
+      const nights = Math.ceil((departure - arrival) / (1000 * 60 * 60 * 24));
+      
+      // Calculer le prix en fonction des saisons traversées
+      let totalPrice = 0;
+      let currentDate = new Date(arrival);
+      
+      while (currentDate < departure) {
+        const season = getSeason(currentDate);
+        totalPrice += season.price / 7; // prix par nuit
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      nightCountEl.textContent = nights;
+      estimatedPriceEl.textContent = Math.round(totalPrice * nights);
+      stayInfoEl.style.display = 'flex';
+    }
+
+    arrivalInput.addEventListener('change', calculateStay);
+    departInput.addEventListener('change', calculateStay);
+
+    // Définir demain comme date minimum d'arrivée
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const year = tomorrow.getFullYear();
+    const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const day = String(tomorrow.getDate()).padStart(2, '0');
+    arrivalInput.min = `${year}-${month}-${day}`;
   </script>
 </body>
 </html>

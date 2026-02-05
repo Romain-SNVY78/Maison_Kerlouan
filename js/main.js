@@ -167,4 +167,55 @@ if (bookForm) {
   });
 }
 
+// ——— 5. Calculateur de tarifs
+const checkInInput = document.getElementById('checkIn');
+const priceDisplay = document.getElementById('priceDisplay');
+
+if (checkInInput) {
+  // Définir la date d'aujourd'hui par défaut
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  checkInInput.value = `${year}-${month}-${day}`;
+
+  // Tarifs par saison
+  const seasons = {
+    'basse': { name: 'Basse saison', price: 590, months: [0, 1, 2, 10, 11] }, // Jan, Fev, Mars, Nov, Dec
+    'moyenne': { name: 'Moyenne saison', price: 730, months: [3, 4, 5, 8, 9] }, // Avr, Mai, Juin, Sept, Oct
+    'haute': { name: 'Haute saison', price: 950, months: [6, 7] } // Juil, Aout
+  };
+
+  function updatePrice() {
+    const dateValue = checkInInput.value;
+    if (!dateValue) return;
+
+    const date = new Date(dateValue);
+    const month = date.getMonth();
+
+    // Trouver la saison
+    let currentSeason = null;
+    for (let season in seasons) {
+      if (seasons[season].months.includes(month)) {
+        currentSeason = seasons[season];
+        break;
+      }
+    }
+
+    if (currentSeason) {
+      const seasonNameEl = priceDisplay.querySelector('.season-name');
+      const seasonPriceEl = priceDisplay.querySelector('.season-price');
+      
+      seasonNameEl.textContent = currentSeason.name;
+      seasonPriceEl.textContent = currentSeason.price;
+    }
+  }
+
+  // Mettre à jour les prix au changement de date
+  checkInInput.addEventListener('change', updatePrice);
+  
+  // Initialiser au chargement
+  updatePrice();
+}
+
 console.log("✅ Ty Pierrot – JS chargé avec succès");
