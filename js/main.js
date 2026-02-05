@@ -44,20 +44,38 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   const nextBtn = overlay.querySelector('.lb-next');
   const closeBtn = overlay.querySelector('.lb-close');
 
-  let galleryImages = [];
+  let allImages = [];
   let currentIndex = 0;
 
-  function openGallery(images, caption, startIndex = 0) {
-    galleryImages = images;
+  function buildAllImages() {
+    allImages = [];
+    const allFigs = document.querySelectorAll('.card-gallery');
+    
+    allFigs.forEach(fig => {
+      const images = fig.dataset.images ? fig.dataset.images.split('|') : [fig.querySelector('img').src];
+      const caption = fig.querySelector('figcaption')?.textContent || '';
+      
+      images.forEach(imgSrc => {
+        allImages.push({
+          src: imgSrc,
+          caption: caption
+        });
+      });
+    });
+  }
+
+  function openGallery(startIndex = 0) {
+    buildAllImages();
     currentIndex = startIndex;
     overlay.classList.add('show');
     showImage();
   }
 
   function showImage() {
-    if (!galleryImages.length) return;
-    imgEl.src = galleryImages[currentIndex];
-    captionEl.textContent = captionEl.dataset.caption || '';
+    if (!allImages.length) return;
+    const img = allImages[currentIndex];
+    imgEl.src = img.src;
+    captionEl.textContent = img.caption;
   }
 
   function closeGallery() {
@@ -65,14 +83,14 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     imgEl.src = '';
   }
 
-  // Navigation
   function nextImage() {
-    currentIndex = (currentIndex + 1) % galleryImages.length;
-    imgEl.src = galleryImages[currentIndex];
+    currentIndex = (currentIndex + 1) % allImages.length;
+    showImage();
   }
+
   function prevImage() {
-    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-    imgEl.src = galleryImages[currentIndex];
+    currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+    showImage();
   }
 
   prevBtn.addEventListener('click', e => { e.stopPropagation(); prevImage(); });
@@ -87,14 +105,27 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   });
 
   // Activation sur clic d’une figure
-  document.querySelectorAll('.card-gallery').forEach(fig => {
+  document.querySelectorAll('.card-gallery').forEach((fig, figIndex) => {
     fig.style.cursor = 'zoom-in';
     fig.addEventListener('click', e => {
       e.preventDefault();
-      const images = fig.dataset.images ? fig.dataset.images.split('|') : [fig.querySelector('img').src];
-      const caption = fig.querySelector('figcaption')?.textContent || '';
-      captionEl.dataset.caption = caption;
-      openGallery(images, caption, 0);
+      buildAllImages();
+      
+      // Trouve l'index de la première image de cette galerie
+      let imageIndex = 0;
+      let count = 0;
+      const allFigs = document.querySelectorAll('.card-gallery');
+      
+      for (let i = 0; i < allFigs.length; i++) {
+        if (allFigs[i] === fig) {
+          imageIndex = count;
+          break;
+        }
+        const images = allFigs[i].dataset.images ? allFigs[i].dataset.images.split('|') : [allFigs[i].querySelector('img').src];
+        count += images.length;
+      }
+      
+      openGallery(imageIndex);
     });
   });
 })();
@@ -136,4 +167,4 @@ if (bookForm) {
   });
 }
 
-console.log("✅ Ty Pierrot – JS chargé avec succès (lightbox corrigée)");
+console.log("✅ Ty Pierrot – JS chargé avec succès");
