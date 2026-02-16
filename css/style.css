@@ -60,9 +60,13 @@ header{
   box-shadow:0 4px 10px rgba(0,123,193,.25);
   transition:all .25s ease;
 }
-.cta:hover{
-  background:linear-gradient(135deg,#00b2f0,#0098db);
+.cta:hover,
+.menu .cta:hover{
+  background:linear-gradient(135deg,#00b2f0,#0098db) !important;
+  color:#fff !important;
   transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(0,123,193,.35) !important;
+  text-decoration:none !important;
 }
 
 /* ===== Hero ===== */
