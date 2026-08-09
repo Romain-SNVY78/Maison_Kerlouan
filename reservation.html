@@ -161,6 +161,7 @@
         <a href="localisation.html">Localisation</a>
         <a href="tarifs.html">Tarifs</a>
         <a href="reservation.html" class="active">Réservation</a>
+        <a href="avis.html">Avis</a>
         <a href="contact.html" class="cta">Contact</a>
       </nav>
     </div>
@@ -292,7 +293,7 @@
       }
 
       nightCountEl.textContent = nights;
-      estimatedPriceEl.textContent = Math.round(totalPrice * nights);
+      estimatedPriceEl.textContent = Math.round(totalPrice) + ' €';
       stayInfoEl.style.display = 'flex';
     }
 
