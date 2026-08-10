@@ -301,7 +301,7 @@ p{margin-bottom:40px}
 }
 
 /* Menu mobile */
-@media (max-width: 768px) {
+@media (max-width: 920px) {
   .burger {
     display: flex;
   }
