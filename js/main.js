@@ -130,17 +130,48 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   });
 })();
 
-// ——— 4. Formulaires mailto (inchangé)
+// ——— 4. Formulaire de contact via EmailJS
 const form = document.getElementById('contactForm');
 if (form) {
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const nom = document.getElementById('nom')?.value || '';
-    const email = document.getElementById('email')?.value || '';
-    const msg = document.getElementById('msg')?.value || '';
-    const body = encodeURIComponent(`Nom : ${nom}\nEmail : ${email}\n\n${msg}`);
-    const mailto = `mailto:contact@ty-pierrot.fr?subject=Contact via site&body=${body}`;
-    window.location.href = mailto;
+
+    const btn = document.getElementById('submitBtn');
+    const feedback = document.getElementById('form-feedback');
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours...';
+    feedback.style.display = 'none';
+
+    const templateParams = {
+      from_name:     document.getElementById('nom')?.value || '',
+      from_email:    document.getElementById('email')?.value || '',
+      phone:         document.getElementById('tel')?.value || '',
+      subject_label: document.getElementById('sujet')?.selectedOptions[0]?.text || '',
+      message:       document.getElementById('msg')?.value || ''
+    };
+
+    emailjs.send('service_3819ix5', 'template_n1cpu3r', templateParams)
+      .then(() => {
+        // Accusé de réception au client en parallèle, sans bloquer le feedback
+        emailjs.send('service_3819ix5', 'template_wzldd9d', templateParams).catch(() => {});
+        feedback.style.background = '#d1fae5';
+        feedback.style.color = '#065f46';
+        feedback.style.border = '1px solid #6ee7b7';
+        feedback.textContent = '✅ Message envoyé ! Nous vous répondrons sous 24h.';
+        feedback.style.display = 'block';
+        form.reset();
+      })
+      .catch(() => {
+        feedback.style.background = '#fee2e2';
+        feedback.style.color = '#991b1b';
+        feedback.style.border = '1px solid #fca5a5';
+        feedback.textContent = "❌ Erreur lors de l'envoi. Veuillez réessayer ou nous contacter par téléphone.";
+        feedback.style.display = 'block';
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Envoyer mon message';
+      });
   });
 }
 

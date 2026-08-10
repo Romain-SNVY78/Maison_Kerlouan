@@ -128,7 +128,8 @@
                 <textarea id="msg" name="msg" required placeholder="Décrivez votre demande en détail..."></textarea>
               </div>
 
-              <button type="submit" class="btn-submit">Envoyer mon message</button>
+              <button type="submit" class="btn-submit" id="submitBtn">Envoyer mon message</button>
+              <div id="form-feedback" role="alert" style="display:none; margin-top:15px; padding:12px 15px; border-radius:8px; font-weight:600;"></div>
               <div class="response-time">
                 <strong>⏱️ Réponse rapide</strong><br>
                 Nous répondons à vos messages sous 24h en semaine.
@@ -200,6 +201,8 @@
       <div class="copyright">© <span id="year"></span> Ty Pierrot - Tous droits reserves.</div>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("ZUBnqf3lS2JnxvU6X");</script>
   <script src="js/main.js"></script>
 </body>
 </html>
